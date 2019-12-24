@@ -31,12 +31,13 @@ $( document ).ready(function() {
         computeTotalPrice();
     };
     var addItem = function(e) {
-        var a = $("<a>")
+        var a = $('<a href="#">')
                 .addClass("delete")
+                .text("-")
                 .click(removeItem);
         var desc = $('<input type="text">')
                 .addClass("desc")
-                .val("item");
+                .val("ITEM");
         var price = $('<input type="text">')
                 .addClass("price")
                 .change(onPriceChange)
@@ -46,6 +47,7 @@ $( document ).ready(function() {
                 .append(desc)
                 .append(price)
                 .appendTo($("ul.items"));
+        desc.focus().select();
         return false;
     };
     $("a.add").click(addItem);
