@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<link rel="stylesheet" type="text/css" href="css4print/paging.css">
+<style type="text/css">@page{ size: 4in 11in; }</style>
+
+<title>BikeSauce - Receipt</title>
+
+<style type="text/css">
+.ticket {
+    width: 4in;
+    font-family: monospace;
+}
+textarea {
+    border: none;
+    width: 100%;
+    display: block;
+    font-size: inherit;
+    font-family: monospace;
+    /*white-space: pre;*/
+    margin: 1em 0px;
+    resize: vertical;
+}
+pre.title {
+    margin: 2em 0px;
+}
+pre.center {
+    width: 100%;
+    text-align: center;
+}
+header {
+    position: relative;
+    padding-left: 150px;
+}
+header img.logo {
+    position: absolute;
+    left: -20px;
+    top: -20px;
+}
+header .name {
+    font-weight: bold;
+    display: block;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- If you want to create two separate/different pages,
+  simply use two <div> with class "page single-page". -->
+
+<div id="first" class="page ticket">
+
+    <header>
+        <img class="logo" src="http://bikesauce.org/wp-content/uploads/2018/01/logo-1.png" />
+        <span class="name">Bikesauce</span>
+        <span class="address">341 Broadview Ave<br/>Toronto, ON M4M 2H1<br/>Canada</span>
+    </header>
+
+    <!-- TODO: Datetime must be dynamic -->
+    <pre class="center title" id="datetime">Dec-24-2019 11:45 PM</pre>
+
+    <pre class="center title">S A L E S   R E C E I P T </pre>
+
+    <textarea rows="10">DERAILLEUR HANGER                8.00
+
+CHAIN KMC Z51                   18.25
+
+PLASTIC BOTTLE                   2.00
+
+BOTTLE CAGE                      1.00
+</textarea>
+
+<textarea rows="6">
+                          HST:   3.36
+                        TOTAL:  29.25
+
+                    *PAYMENTS*
+                        DEBIT:  29.25
+                       CHANGE:   0.00
+    </textarea>
+
+    <pre class="center">Return policy: No refunds/exchanges.</pre>
+
+    <pre class="center">T H A N K   Y O U</pre>
+    <pre class="center">F O R   V I S I T I N G</pre>
+    <pre class="center">- - -</pre>
+    <pre class="center">B I K E   S A U C E</pre>
+    <pre class="center">- - -</pre>
+    <pre class="center">Mon/Tue/Thu  5PM - 9PM</pre>
+    <pre class="center">Sat/Sun     12PM - 6PM</pre>
+
+  </div>
+</div><!-- PAGE -->
+
+</body>
+</html>

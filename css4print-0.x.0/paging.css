@@ -1,0 +1,283 @@
+/* Both "print" and "screen" media */
+body {
+  margin: 0;
+}
+
+/* A ".page" is not necessarly a single page.
+ * Example, my résumé is contained in one '.page' element
+ * but it's long and printed onto 2 or 3 pages (depending on the content).
+ *
+ * That's why the "height" property is not set for '.page'
+ * but is set for '.single-page'.
+ */
+.page {
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* A4         is 21cm x 29.7cm
+ * Letter     is 8.5in x 11in
+ */
+.page-a4 {      width: 21cm; }
+.page-letter {  width: 8.5in; }
+/* Setting the "height" is only necessary/useful for .single-page
+ * Default behaviour is to adapt the length of the page to its content,
+ * making it "continuous" */
+.page-a4.single-page {      height: 29.7cm; }
+.page-letter.single-page {  height: 11in; }
+
+.page-a4.landscape {                  width: 29.7cm; }
+.page-letter.landscape {              width: 11in; }
+.page-a4.single-page.landscape {      height: 209mm;  }
+.page-letter.single-page.landscape {  height: 8.5in; }
+/* /!\ bug : if 21cm is set, a second blank page is issued at print :-( */
+
+.page , /* default padding is 10mm */
+.page.padding-10mm {        padding: 10mm;      }
+.page.padding-none {        padding: 0;         }
+.page.padding-5mm  {        padding: 5mm;       }
+.page.padding-15mm {        padding: 15mm;      }
+.page.padding-20mm {        padding: 20mm;      }
+.page.padding-1in  {        padding: 1in;       }
+
+
+
+
+/* Only "print" media */
+@media print {
+  body {
+    background: none;
+    background-color: white;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .page {
+    border: none;
+    margin: 0;
+  }
+}
+
+@page {
+  /* the "size" property still needs to be written in every HTML document */
+  margin: 0;
+  -webkit-print-color-adjust: exact;
+}
+/* Tried to use named page selectors as defined in CSS3
+ *    https://www.w3.org/TR/css3-page/#using-named-pages
+ * but it looks like it's not supported (at least by Chromium 66 at 2018-06-30)
+ *
+ * @page pageA4 { ... }
+ */
+
+
+/* Only "screen" media, for online rendering or preview in a browser */
+@media screen {
+  body {
+    background-color: rgb(200,200,200);
+    background: repeating-linear-gradient(
+      45deg,
+      #DDD,
+      #DDD 10px,
+      #CCC 10px,
+      #CCC 20px
+    );
+    padding-top: 0.5cm;
+    padding-bottom: 0.5cm;
+  }
+
+  .page {
+    border: 1px solid rgb(100,100,100);
+    background-color: white;
+    margin: 0.5cm auto;
+    /* 0.5cm : to create a vertical separation between two pages
+     *          or at the edges with document.body
+     * auto  : to center the page in document.body */
+  }
+}
+
+
+
+
+
+/* *** PAGE-BREAK ***
+ *  A <div class="pagebreak"> element can be used in the HTML flow
+ *  to force a page-break when printing.
+ *
+ *  By default, the <div> won't be visible for the screen.
+ *  But for 'wysiwyg' purpose, the <div> can be applied the class "visible"
+ *  so that it becomes visible in the browser.
+ */
+
+@media screen {
+  div.pagebreak {
+    display: none;
+  }
+  div.pagebreak.visible {
+    border: none;
+    display: block;
+    box-sizing: content-box;
+    position: relative;
+  }
+  /* Specific rules to circumvent the page's padding
+   * | pagebreak's ... has to be equal to page's
+   * |  - margin-left          ->         - padding-left
+   * |  - margin-right         ->         - padding-left
+   * |  - padding-top          ->         - padding-bottom
+   * |  - padding-bottom       ->         - padding-top
+   */
+  .page div.pagebreak.visible, /* default padding is 10mm */
+  .page.padding-10mm div.pagebreak.visible {
+    margin-left: -10mm;
+    margin-right: -10mm;
+    padding-top: 10mm;
+    padding-bottom: 10mm;
+  }
+  .page.padding-5mm div.pagebreak.visible {
+    margin-left: -5mm;
+    margin-right: -5mm;
+    padding-top: 5mm;
+    padding-bottom: 5mm;
+  }
+  .page.padding-15mm div.pagebreak.visible {
+    margin-left: -15mm;
+    margin-right: -15mm;
+    padding-top: 15mm;
+    padding-bottom: 15mm;
+  }
+  .page.padding-20mm div.pagebreak.visible {
+    margin-left: -20mm;
+    margin-right: -20mm;
+    padding-top: 20mm;
+    padding-bottom: 20mm;
+  }
+  .page.padding-1in div.pagebreak.visible {
+    margin-left: -1in;
+    margin-right: -1in;
+    padding-top: 1in;
+    padding-bottom: 1in;
+  }
+  .page.padding-none div.pagebreak.visible {
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  /* make a translucid grey background-color if mouse is over */
+  div.pagebreak.visible:hover {
+    background-color: rgba(192,192,192,0.25);
+  }
+  /* the ":before" element is the dashed line */
+  div.pagebreak.visible:before {
+    content: " ";
+    display: block;
+    width: 104%;
+    margin-left: -2%;
+    border-top: 1px dashed red;
+  }
+  /* the ":after" element is the "page-break" text */
+  div.pagebreak.visible:after {
+    color: red;
+    content: "page-break";
+    padding: 0 0.5rem 0 1em;
+    display: inline-block;
+    position: absolute;
+  }
+  div.pagebreak.visible.margin-left:after ,
+  div.pagebreak.visible.margin-right:after {
+    width: 5em;
+  }
+  div.pagebreak.visible.margin-left:after {
+    right: 100%;
+  }
+  div.pagebreak.visible.margin-right:after {
+    left: 100%;
+  }
+}
+@media print {
+  div.pagebreak {
+    display: block;
+    page-break-before: always;
+    height: 0px;
+    overflow: hidden;
+    /* the "overflow" property set to "hidden" is also important
+     * for the margin of the next element in the HTML flow.
+     * [don't understand exactly why, it's mandatory :-(] */
+
+    border: none;
+  }
+
+  /* The "margin-top" value for div.pagebreak
+   *  has to be equals to
+   *  the "padding-top" value for ".page"
+   */
+  .page div.pagebreak, /* default padding is 10mm */
+  .page.padding-10mm div.pagebreak {
+    margin-top: 10mm;
+  }
+  .page.padding-5mm div.pagebreak {
+    margin-top: 5mm;
+  }
+  .page.padding-15mm div.pagebreak {
+    margin-top: 15mm;
+  }
+  .page.padding-20mm div.pagebreak {
+    margin-top: 20mm;
+  }
+  .page.padding-1in div.pagebreak {
+    margin-top: 1in;
+  }
+  .page.padding-none div.pagebreak {
+    /* for .page with no padding, it's still necessary to use a very small margin
+     * as thin as 0.001cm... */
+    margin-top: 0.001cm;
+  }
+}
+/* END OF *** PAGE-BREAK *** STUFF */
+
+
+
+/* *** PAGE-HEADER & PAGE-FOOTER ***
+ *  By default, header and footer are not visible in the HTML flow
+ *  in the browser, but only on the printed job.
+ *  Except if the "visible" class is applied to the element.
+ */
+@media screen {
+  .page .pageheader ,
+  .page .pagefooter {
+    display: none;
+  }
+  .page .pageheader.visible ,
+  .page .pagefooter.visible {
+    display: block;
+  }
+}
+@media print {
+  .page .pageheader ,
+  .page .pagefooter {
+    display: block;
+  }
+}
+.page.single-page .pagefooter {
+  position: absolute;
+  box-sizing: border-box;
+}
+
+/* We have to positionate the footer taking the padding
+ * into account.
+ */
+.page              .pagefooter, /* default padding is 10mm */
+.page.padding-10mm .pagefooter {
+  left: 10mm;     right: 10mm;      bottom: 10mm;
+}
+.page.padding-5mm  .pagefooter {
+  left: 5mm;      right: 5mm;       bottom: 5mm;
+}
+.page.padding-15mm .pagefooter {
+  left: 15mm;     right: 15mm;      bottom: 15mm;
+}
+.page.padding-20mm .pagefooter {
+  left: 20mm;     right: 20mm;      bottom: 20mm;
+}
+.page.padding-1in  .pagefooter {
+  left: 1in;      right: 1in;       bottom: 1in;
+}
