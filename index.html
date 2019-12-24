@@ -9,6 +9,9 @@
 
 <link rel="stylesheet" type="text/css" href="ticket.css">
 
+<script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script type="text/javascript" src="ticket.js"></script>
+
 </head>
 <body>
 
@@ -56,11 +59,11 @@
     <ul class="sum">
         <li>
             <input type="text" class="label" value="HST:" />
-            <input type="text" class="price" value="3.36" />
+            <input type="text" class="price hstprice" value="3.36" />
         </li>
         <li>
             <input type="text" class="label" value="TOTAL:" />
-            <input type="text" class="price" value="29.25" />
+            <input type="text" class="price totalprice" id="totalPrice" value="29.25" />
         </li>
         <li class="sep"></li>
         <li>
@@ -68,7 +71,7 @@
         </li>
         <li>
             <input type="text" class="label" value="DEBIT:" />
-            <input type="text" class="price" value="29.25" />
+            <input type="text" class="price totalprice" value="29.25" />
         </li>
         <li>
             <input type="text" class="label" value="CHANGE:" />

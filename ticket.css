@@ -64,7 +64,7 @@ ul input.desc {
     width: 100%;
 }
 ul input.label {
-    width: 80%;
+    width: 78%;
     text-align: right;
 }
 ul input.price {
@@ -73,6 +73,9 @@ ul input.price {
     width: 5em;
     text-align: right;
     background-color: rgba(255,255,255,0);
+}
+input.invalid {
+    color: red;
 }
 
 ul a.delete {
