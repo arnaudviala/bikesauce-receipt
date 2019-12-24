@@ -12,6 +12,20 @@
     width: 4in;
     font-family: monospace;
 }
+header {
+    position: relative;
+    padding-left: 150px;
+}
+header img.logo {
+    position: absolute;
+    left: -20px;
+    top: -20px;
+}
+header .name {
+    font-weight: bold;
+    display: block;
+}
+
 textarea {
     border: none;
     width: 100%;
@@ -29,20 +43,58 @@ pre.center {
     width: 100%;
     text-align: center;
 }
-header {
+
+ul {
+    margin: 0;
+    width: 100%;
+    padding: 0px;
+}
+ul li {
+    list-style-type: none;
+    padding: 0.66em 0px;
     position: relative;
-    padding-left: 150px;
+    padding-left: 3em;
+    margin-left: -3em;
 }
-header img.logo {
-    position: absolute;
-    left: -20px;
-    top: -20px;
+ul.sum li {
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
 }
-header .name {
-    font-weight: bold;
+ul.sum li.sep {
     display: block;
+    height: 1em;
+}
+ul input {
+    font-size: inherit;
+    font-family: monospace;
+    margin: 0px;
+    border: none;
+}
+ul input.desc {
+    width: 100%;
+}
+ul input.label {
+    width: 80%;
+    text-align: right;
+}
+ul input.price {
+    position: absolute;
+    right: 0px;
+    width: 5em;
+    text-align: right;
+    background-color: rgba(255,255,255,0);
 }
 
+ul a.delete {
+    position: absolute;
+    left: 1.5em;
+    top: 0.66em;
+    display: none;
+}
+
+ul li:hover a.delete {
+    display: block;
+}
 </style>
 
 </head>
@@ -64,29 +116,60 @@ header .name {
 
     <pre class="center title">S A L E S   R E C E I P T </pre>
 
-    <textarea rows="10">DERAILLEUR HANGER                8.00
+    <ul class="items">
+        <li>
+            <a href="#" class="delete">-</a>
+            <input type="text" class="desc" value="DERAILLEUR HANGER" />
+            <input type="text" class="price" value="8.00" />
+        </li>
+        <li>
+            <a href="#" class="delete">-</a>
+            <input type="text" class="desc" value="CHAIN KMC Z51" />
+            <input type="text" class="price" value="18.25" />
+        </li>
+        <li>
+            <a href="#" class="delete">-</a>
+            <input type="text" class="desc" value="PLASTIC BOTTLE" />
+            <input type="text" class="price" value="2.00" />
+        </li>
+        <li>
+            <a href="#" class="delete">-</a>
+            <input type="text" class="desc" value="BOTTLE CAGE" />
+            <input type="text" class="price" value="1.00" />
+        </li>
+    </ul>
 
-CHAIN KMC Z51                   18.25
+    <a href="#" class="add">+</a>
 
-PLASTIC BOTTLE                   2.00
+    <ul class="sum">
+        <li>
+            <input type="text" class="label" value="HST:" />
+            <input type="text" class="price" value="3.36" />
+        </li>
+        <li>
+            <input type="text" class="label" value="TOTAL:" />
+            <input type="text" class="price" value="29.25" />
+        </li>
+        <li class="sep"></li>
+        <li>
+            <input type="text" class="label" value="*PAYMENTS*" />
+        </li>
+        <li>
+            <input type="text" class="label" value="DEBIT:" />
+            <input type="text" class="price" value="29.25" />
+        </li>
+        <li>
+            <input type="text" class="label" value="CHANGE:" />
+            <input type="text" class="price" value="0.00" />
+        </li>
+    </ul>
 
-BOTTLE CAGE                      1.00
-</textarea>
-
-<textarea rows="6">
-                          HST:   3.36
-                        TOTAL:  29.25
-
-                    *PAYMENTS*
-                        DEBIT:  29.25
-                       CHANGE:   0.00
-    </textarea>
+    <pre class="center">- - -</pre>
 
     <pre class="center">Return policy: No refunds/exchanges.</pre>
-
-    <pre class="center">T H A N K   Y O U</pre>
-    <pre class="center">F O R   V I S I T I N G</pre>
     <pre class="center">- - -</pre>
+    <pre class="center">T h a n k   Y o u</pre>
+    <pre class="center">f o r   v i s i t i n g</pre>
     <pre class="center">B I K E   S A U C E</pre>
     <pre class="center">- - -</pre>
     <pre class="center">Mon/Tue/Thu  5PM - 9PM</pre>
